@@ -1,38 +1,44 @@
 # React Native Prevent Screenshot
 
-### Prevent Capture Screen
+## Prevent Capture Screen
 
-* Android
+### Android
 
-  * Prevent capture screen by setFlag secure
+* Prevent capture screen by setFlag secure
 
-  ```java
-  getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-  ```
+```java
+getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+```
 
-  * If you want to remove flag secure
+* If you want to remove flag secure
 
-  ```java
-  getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
-  ```
+```java
+getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
+```
 
-* iOS
+### iOS
 
-### Hide Preview Screenshot
+You can't prevent screen capture on iOS.
 
-* Android
+I have suggested 2 methods
+1. After the user capture screen (UIApplicationUserDidTakeScreenshot), send the capture event to the server or display a warning message.
+2. Try ScreenShieldKit (https://screenshieldkit.com). You can read more from this article. https://medium.com/nomtek/screenshot-preventing-on-mobile-apps-9e62f51643e9
 
-  * SetFlag secure already hide preview screenshot
+## Hide Preview Screenshot
 
-  ```java
-  getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-  ```
+### Android
 
-* iOS
+* SetFlag secure already hide preview screenshot
 
-  * Overlay screen by added 2 two into appDelegate.m
+```java
+getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+```
 
-```code
+### iOS
+
+* Overlay screen by added 2 two into appDelegate.m
+
+```objective-c
 - (void)applicationWillResignActive:(UIApplication *)application {
 
 // fill screen with our own colour
@@ -62,6 +68,8 @@ colourView.alpha = 0;
 }
 ```
 
-#### Reference
+#### References
 
 * http://pinkstone.co.uk/how-to-control-the-preview-screenshot-in-the-ios-multitasking-switcher/
+* https://stackoverflow.com/a/48228319/1754750
+* https://medium.com/nomtek/screenshot-preventing-on-mobile-apps-9e62f51643e9
